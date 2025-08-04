@@ -32,7 +32,7 @@ uvotw2err = np.array([0.07, 0.12, 0.13, 0.10, 0.16, 0.25, 0.17, 0.14, 0.11, 0.09
 
 daysx = np.array([51903.721435,53738.798611,54291.714826,54993.318889,54995.313113,57386.405741,58310.090417,58844.768565,59385.262894,59387.268484])
 
-daysupl = np.array([48437.8, 58491.533206,59377.268484,59379.268484,59381.275382])
+daysupl = np.array([48437.8, 58491.533206,59377.268484,59379.268484,59381.275382])#首个为ROSAT数据
 
 lflux_022 = 10**np.array([-12.4818, -12.6029, -12.7477, -12.4363, -12.3577, -13.47, -13.50, -13.71, -13.74, -13.49])
 lf022_min = 10**(-np.array([0.03, 0.02, 0.04, 0.02, 0.03, 0.15, 0.45, 0.22, 0.17, 0.13])+np.array([-12.4818, -12.6029, -12.7477, -12.4363, -12.3577, -13.47, -13.50, -13.71, -13.74, -13.49]))
@@ -94,9 +94,9 @@ def piecewise_cutoff_powerlaw(x, xc, a, c, power_index=-9.0 / 16.0):
     
     # 新的后半段函数
     def cutoff_powerlaw_func(x_val):
-        return a * ((x_val-xc+1)**power_index) * np.exp(-c * (x_val-xc+1) ** (-power_index))
+        return a * ((x_val-xc+1)**power_index) * np.exp(-c * (x_val-xc+1) ** (-power_index))  #以xc为x=1
     
-    # 计算在连接点的常数值以保证连续性
+    # 计算在连接点的常数值
     constant_value = cutoff_powerlaw_func(xc)
     
     # 使用 np.piecewise 构建分段函数
@@ -123,7 +123,7 @@ def piecewise_constant_powerlaw(x, xc, a, n):
     return np.piecewise(x, 
                         [x <= xc, x > xc], 
                         [lambda x: constant_value,   # x <= xc 时的函数
-                         lambda x: a * ((x-xc+1)**n)])       # x > xc 时的函数
+                         lambda x: a * ((x-xc+1)**n)])       # x > xc 时的函数,以xc为x=1
 
 
 
