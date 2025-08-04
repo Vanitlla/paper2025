@@ -77,7 +77,7 @@ from astropy.cosmology import FlatLambdaCDM
 cosmo = FlatLambdaCDM(H0=70, Om0=0.3) 
 from astropy import units as u
 
-# 1. 定义分段函数（常数 + 幂律）
+# 定义分段函数（常数 + 幂律）
 # 函数在连接点 xc 处是连续的
 def piecewise_cutoff_powerlaw(x, xc, a, c, power_index=-9.0 / 16.0):
     """
@@ -166,7 +166,7 @@ for xc_candidate in xc_candidates:
         bounds_ac = ([1e20, 0.4], [np.inf, 0.6]) # c 必须为正，但可以先不设上限
         popt_ac, _ = curve_fit(temp_func, fitmjd, fitf022, p0=initial_guess_ac, bounds=bounds_ac)
         
-        # 4. 计算当前xc下的残差平方和 (SSR)
+        # 计算当前xc下的残差平方和 (SSR)
         y_pred = temp_func(fitmjd, *popt_ac)
         chi2 = np.sum(((fitf022 - y_pred) / y_err)**2)
         
@@ -191,7 +191,7 @@ for xc_candidate in xc_candidates:
         bounds_ac = ([1e20, 0.9], [np.inf, 100]) # c 必须为正，但可以先不设上限
         popt_ac, _ = curve_fit(ttemp_func, fitmjd, fitf022, p0=initial_guess_ac, bounds=bounds_ac)
         
-        # 4. 计算当前xc下的残差平方和 (SSR)
+        # 计算当前xc下的残差平方和 (SSR)
         y_pred = ttemp_func(fitmjd, *popt_ac)
         chi2 = np.sum(((fitf022 - y_pred) / y_err)**2)
         
@@ -215,7 +215,7 @@ for xc_candidate in xc_candidates:
         bounds_ac = ([1e20, -10], [np.inf, -1]) # 
         popt_ac, _ = curve_fit(tttemp_func, fitmjd, fitf022, p0=initial_guess_ac, bounds=bounds_ac)
         
-        # 4. 计算当前xc下的残差平方和 (SSR)
+        # 计算当前xc下的残差平方和 (SSR)
         y_pred = tttemp_func(fitmjd, *popt_ac)
         chi2 = np.sum(((fitf022 - y_pred) / y_err)**2)
         
